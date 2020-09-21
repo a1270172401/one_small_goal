@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:
+  profiles:
+#    继承公共包的yml文件内容 分支切换用逗号分隔在后面添加对应分支即可 列如 common,dev
+    include: common
+  application:
+    name: small-goal-gateway
