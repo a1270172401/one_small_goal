@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 49.234.192.103:8848
+      config:
+        server-addr: 49.234.192.103:8848
+        file-extension: yml
+        prefix: small-goal-master
+        timeout: 3000
+        extension-configs:
+          - data-id: small-goal-gateway.yml
+
