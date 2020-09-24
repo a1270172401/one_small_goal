@@ -143,10 +143,9 @@ public class Generator {
 	}
 
 	/**
-	 * 	**************要生成代码的小伙伴看这里********************
-	 * 第一步将lib目录下的jar包导入项目 ： http://www.lwqgj.cn/771.html
-	 * 第二步修改generator.xml文件下的todo
-	 * 第三步修改该main方法下的map
+	 * 1 修改config目录下相应的数据库配置
+	 * 2 运行该main方法
+	 * 3 生成代码完毕
 	 */
 	public static void main(String[] args) throws Exception {
 		LOGGER.info("开始生成模版文件...");
