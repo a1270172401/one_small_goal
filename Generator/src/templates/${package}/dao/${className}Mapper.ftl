@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /** 
- * <p>Description: [${table.tableDesc}dao]</p>
+ * <p>Description: [${table.tableDesc}mapper]</p>
  * Created on ${date}
  * @author  <a href="mailto: ${email}">${author}</a>
  * @version 1.0 

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import ${package}.model.Page;
-import ${package}.dao.${className}Dao;
+import ${package}.mapper.${className}Mapper;
 import ${package}.model.${className}Model;
 import ${package}.service.${className}Service;
 import com.lxmall.mainframe.utils.ParamValidateUtils;
@@ -24,10 +24,10 @@ import com.lxmall.mainframe.utils.ParamValidateUtils;
 public class ${className}ServiceImpl implements ${className}Service {
 	
 	/**
-	 * <p>Discription:[${table.tableDesc}dao]</p>
+	 * <p>Discription:[${table.tableDesc}Mapper]</p>
 	 */
 	@Autowired
-	private ${className}Dao ${classNameLower}Dao;
+	private ${className}Mapper ${classNameLower}Mapper;
 	
 	/**
 	 * <p>Discription:[${table.tableDesc}数据分页查询]</p>
@@ -55,7 +55,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 				}else{
 					lis = Arrays.asList(queryFields.split(","));
 				}
-				list${className} = this.${classNameLower}Dao.queryPage${className}(page,${classNameLower}Model,lis);
+				list${className} = this.${classNameLower}Mapper.queryPage${className}(page,${classNameLower}Model,lis);
 			}
 		}catch(Exception e){
 			throw new RuntimeException(e);
@@ -84,7 +84,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 			}else{
 				lis = Arrays.asList(queryFields.split(","));
 			}
-			list${className} = this.${classNameLower}Dao.queryList${className}(${classNameLower}Model,lis);
+			list${className} = this.${classNameLower}Mapper.queryList${className}(${classNameLower}Model,lis);
 		}catch(Exception e){
 			throw new RuntimeException(e);
 		}
@@ -104,7 +104,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 		
 		Long count = (long)0;
 		try{
-			count = this.${classNameLower}Dao.queryCount${className}(${classNameLower}Model);
+			count = this.${classNameLower}Mapper.queryCount${className}(${classNameLower}Model);
 		}catch(Exception e){
 			throw new RuntimeException(e);
 		}
@@ -126,7 +126,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 			if(ParamValidateUtils.isEmpty(id)){
 				return null;
 			}else{
-				model = this.${classNameLower}Dao.query${className}ById(id,null);
+				model = this.${classNameLower}Mapper.query${className}ById(id,null);
 			}
 		}catch(Exception e){
 			throw new RuntimeException(e);
@@ -150,7 +150,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 			if(ParamValidateUtils.isEmpty(${classNameLower}Model)){
 				return 0;
 			}else{
-				count = this.${classNameLower}Dao.add${className}(${classNameLower}Model);
+				count = this.${classNameLower}Mapper.add${className}(${classNameLower}Model);
 			}
 			
 		}catch(Exception e){
@@ -175,7 +175,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 			if(ParamValidateUtils.isEmpty(${classNameLower}Model) || ParamValidateUtils.isEmpty(${classNameLower}Model.get${modelIdFirstUpper}())){
 				return 0;
 			}else{
-				count = this.${classNameLower}Dao.update${className}(${classNameLower}Model);
+				count = this.${classNameLower}Mapper.update${className}(${classNameLower}Model);
 			}	
 		}catch(Exception e){
 			throw new RuntimeException(e);
@@ -199,7 +199,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 			if(ParamValidateUtils.isEmpty(id)){
 				return 0;
 			}else{
-				count = this.${classNameLower}Dao.remove${className}ById(id);
+				count = this.${classNameLower}Mapper.remove${className}ById(id);
 			}		
 		}catch(Exception e){
 			throw new RuntimeException(e);
@@ -224,7 +224,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 				return 0;
 			}else{
 				List<String> lis = Arrays.asList(ids.split(","));
-				count = this.${classNameLower}Dao.remove${className}ByIds(lis);
+				count = this.${classNameLower}Mapper.remove${className}ByIds(lis);
 			}
 						
 		}catch(Exception e){
