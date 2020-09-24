@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${packageFirst}.${package}.mapper.${className}Mapper">
+	<!-- 返回值映射map -->
+	<resultMap id="${classNameLower}VOMapperMap" type="${packageFirst}.${package}.vo.${className}VO">
+		<#list table.columns as column>
+			<result property="${column.name}" column="${column.dbName}" />
+		</#list>
+	</resultMap>
+
+	
+</mapper>
