@@ -21,7 +21,6 @@ import java.util.*;
  */
 public class Generator {
 	private Properties properties = null;
-	private static final Logger LOGGER = LoggerFactory.getLogger(Generator.class);
 
 	public Generator() throws Exception {
 		properties = new Properties();
@@ -31,12 +30,12 @@ public class Generator {
 
 	public Table parseTable(String tableName) throws Exception {
 		String column = "%";
-		LOGGER.info("driver>>"+ Config.JDBC_DRIVER);
-		LOGGER.info("url>>"+Config.JDBC_URL);
-		LOGGER.info("name>>"+Config.JDBC_USERNAME);
-		LOGGER.info("password>>"+Config.JDBC_PASSWORD);
-		LOGGER.info("catalog>>"+Config.CATALOG);
-		LOGGER.info("schema>>"+Config.SCHEMA);
+		System.out.println("driver>>"+ Config.JDBC_DRIVER);
+		System.out.println("url>>"+Config.JDBC_URL);
+		System.out.println("name>>"+Config.JDBC_USERNAME);
+		System.out.println("password>>"+Config.JDBC_PASSWORD);
+		System.out.println("catalog>>"+Config.CATALOG);
+		System.out.println("schema>>"+Config.SCHEMA);
 
 		Class.forName(Config.JDBC_DRIVER);
 		Connection conn = java.sql.DriverManager.getConnection(Config.JDBC_URL, Config.JDBC_USERNAME, Config.JDBC_PASSWORD);
@@ -148,7 +147,7 @@ public class Generator {
 	 * 3 生成代码完毕
 	 */
 	public static void main(String[] args) throws Exception {
-		LOGGER.info("开始生成模版文件...");
+		System.out.println("开始生成模版文件...");
 		Generator g = new Generator();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("small_goal_user","用户表");
@@ -158,6 +157,6 @@ public class Generator {
 			//id 是数据库主键字段
 			g.gen(e.getKey(), e.getValue(),"id","id");
 		}
-		LOGGER.info("模版文件生成完毕...");
+		System.out.println("模版文件生成完毕...");
 	}
 }
