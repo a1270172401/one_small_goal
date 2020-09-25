@@ -151,7 +151,7 @@ public class Generator {
 		LOGGER.info("开始生成模版文件...");
 		Generator g = new Generator();
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("t_name","用户表");
+		map.put("small_goal_user","用户表");
 		Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry<String, String> e = it.next();

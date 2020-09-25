@@ -1,6 +1,5 @@
 package ${packageFirst}.${package}.vo;
 
-import java.io.Serializable;
 import lombok.Data;
 import ${packageFirst}.${package}.entity.${className};
 
