@@ -10,4 +10,6 @@ spring:
         timeout: 3000
         extension-configs:
           - data-id: small-goal-gateway.yml
-
+#配置扫描xml的位置
+mybatis:
+  mapper-locations: com.**.*.xml
