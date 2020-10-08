@@ -143,6 +143,7 @@ public class Generator {
 
 	/**
 	 * 1 修改config目录下相应的数据库配置
+	 * 2 修改该main方法中的表名，多个map使用多个
 	 * 2 运行该main方法
 	 * 3 生成代码完毕
 	 */
