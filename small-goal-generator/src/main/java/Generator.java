@@ -1,11 +1,13 @@
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.read.metadata.ReadSheet;
 import common.Column;
 import common.Table;
-import config.Config;
+import config.CommonConfig;
+import config.TableConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import utils.CamelCaseUtils;
 import utils.FileHelper;
 
@@ -13,8 +15,10 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
+import java.sql.SQLException;
 import java.util.*;
+
+import static utils.ExcelUtils.repeatedRead;
 
 /**
  * @author 念着倒才子傻
@@ -30,18 +34,24 @@ public class Generator {
 
 	public Table parseTable(String tableName) throws Exception {
 		String column = "%";
-		System.out.println("driver>>"+ Config.JDBC_DRIVER);
-		System.out.println("url>>"+Config.JDBC_URL);
-		System.out.println("name>>"+Config.JDBC_USERNAME);
-		System.out.println("password>>"+Config.JDBC_PASSWORD);
-		System.out.println("catalog>>"+Config.CATALOG);
-		System.out.println("schema>>"+Config.SCHEMA);
+		System.out.println("driver>>"+ TableConfig.JDBC_DRIVER);
+		System.out.println("url>>"+ TableConfig.JDBC_URL);
+		System.out.println("name>>"+ TableConfig.JDBC_USERNAME);
+		System.out.println("password>>"+ TableConfig.JDBC_PASSWORD);
+		System.out.println("catalog>>"+ TableConfig.CATALOG);
+		System.out.println("schema>>"+ TableConfig.SCHEMA);
 
-		Class.forName(Config.JDBC_DRIVER);
-		Connection conn = java.sql.DriverManager.getConnection(Config.JDBC_URL, Config.JDBC_USERNAME, Config.JDBC_PASSWORD);
+		Class.forName(TableConfig.JDBC_DRIVER);
+		Connection conn = null;
+		try {
+			conn = java.sql.DriverManager.getConnection(TableConfig.JDBC_URL, TableConfig.JDBC_USERNAME, TableConfig.JDBC_PASSWORD);
+		} catch (SQLException throwables) {
+			System.out.println("连接数据库失败，请检查数据库连接");
+			return null;
+		}
 		DatabaseMetaData dmd = conn.getMetaData();
 
-		ResultSet rs = dmd.getColumns(Config.CATALOG, Config.SCHEMA, tableName, column);
+		ResultSet rs = dmd.getColumns(TableConfig.CATALOG, TableConfig.SCHEMA, tableName, column);
 		List<Column> columns = new ArrayList<Column>();
 		while (rs.next()) {
 			Column c = new Column();
@@ -66,7 +76,7 @@ public class Generator {
 			columns.add(c);
 		}
 		List<Column> pkColumns = new ArrayList<Column>();
-		ResultSet pkrs = dmd.getPrimaryKeys(Config.CATALOG, Config.SCHEMA, tableName);
+		ResultSet pkrs = dmd.getPrimaryKeys(TableConfig.CATALOG, TableConfig.SCHEMA, tableName);
 		while(pkrs.next()){
 			Column c = new Column();
 			String name = pkrs.getString("COLUMN_NAME");
@@ -79,7 +89,7 @@ public class Generator {
 
 		Table t = new Table();
 
-		String prefiex = Config.TABLE_REMOVE_PREFIXES;
+		String prefiex = CommonConfig.TABLE_REMOVE_PREFIXES;
 		String name = tableName;
 		if( prefiex != null && !"".equals(prefiex) ){
 			name = tableName.split(prefiex)[0];
@@ -100,7 +110,7 @@ public class Generator {
 	 */
 	public void gen(String tableName,String tableDescAndCat,String id,String modelId) throws Exception {
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_21);
-		String outRoot = Config.OUT_PATH;
+		String outRoot = CommonConfig.OUT_PATH;
 		//将首字母转为大写
 		StringBuffer buffer = new StringBuffer();
 		String namePart1 = modelId.substring(0, 1).toUpperCase();
@@ -115,12 +125,12 @@ public class Generator {
 		root.put("primaryKey", id);
 		root.put("modelId", modelId);
 		root.put("modelIdFirstUpper", buffer);
-		root.put("package", Config.BASE_PACKAGE);
-		root.put("date", Config.DATE);
-		root.put("year", Config.YEAR);
-		root.put("author", Config.AUTHOR);
-		root.put("email", Config.EMAIL);
-		root.put("packageFirst",Config.PACKAGE_FIRST);
+		root.put("package", CommonConfig.BASE_PACKAGE);
+		root.put("date", CommonConfig.DATE);
+		root.put("year", CommonConfig.YEAR);
+//		root.put("author", CommonConfig.AUTHOR);
+		root.put("email", CommonConfig.EMAIL);
+		root.put("packageFirst", CommonConfig.PACKAGE_FIRST);
 		String templateDir = this.getClass().getClassLoader().getResource("templates").getPath();
 		File tdf = new File(templateDir);
 		List<File> files = FileHelper.findAllFile(tdf);
@@ -143,21 +153,37 @@ public class Generator {
 
 	/**
 	 * 1 修改config目录下相应的数据库配置
-	 * 2 修改该main方法中的表名，多个map使用多个
 	 * 2 运行该main方法
 	 * 3 生成代码完毕
 	 */
 	public static void main(String[] args) throws Exception {
-		System.out.println("开始生成模版文件...");
-		Generator g = new Generator();
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("small_goal_user","用户表");
-		Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry<String, String> e = it.next();
-			//id 是数据库主键字段
-			g.gen(e.getKey(), e.getValue(),"id","id");
+		System.out.println("开始"+ CommonConfig.TYPE.getDetail()+"...");
+		switch (CommonConfig.TYPE.getType()){
+			case CommonConfig.GET_MVC :
+				dateBase();
+				break;
+			case CommonConfig.GET_SPECIAL_VO:
+				repeatedRead();
+				break;
+			default:
+				System.out.println("配置类型有误，请检查配置文件");
 		}
 		System.out.println("模版文件生成完毕...");
 	}
+
+	/**
+	 * 连接数据库生成MVC层
+	 * @throws Exception
+	 */
+	private static void dateBase() throws Exception {
+		Generator g = new Generator();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put(TableConfig.TABLE_NAME, TableConfig.TABLE_REMARK);
+		for (Map.Entry<String, String> e : map.entrySet()) {
+			//id 是数据库主键字段
+			g.gen(e.getKey(), e.getValue(), TableConfig.ID, TableConfig.MODEL_ID);
+		}
+	}
+
+
 }

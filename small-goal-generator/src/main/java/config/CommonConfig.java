@@ -1,36 +1,19 @@
 package config;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * 公共配置文件
  * @author 念着倒才子傻
  */
-public class Config {
+public class CommonConfig {
     /**
-     * 数据库连接
+     * 操作类型
      */
-    public static final String JDBC_URL = "jdbc:mysql://49.234.192.103:3306/test?useUnicode=true&amp;characterEncoding=UTF8";
-    /**
-     * 数据库账户
-     */
-    public static final String JDBC_USERNAME = "root";
-    /**
-     * 数据库密码
-     */
-    public static final String JDBC_PASSWORD = "root";
-    /**
-     * 数据库驱动
-     */
-    public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    /**
-     * oracle需要指定jdbc.schema,其它数据库忽略此项配置
-     */
-    public static final String CATALOG = null;
-    /**
-     * oracle需要指定jdbc.schema,其它数据库忽略此项配置
-     */
-    public static final String SCHEMA = "%";
+    public static final Type TYPE = Type.MEKE_SPECIAL_VO;
     /**
      * 作者
      */
@@ -58,12 +41,17 @@ public class Config {
     /**
      * 生成文件的位置，默认在当前项目的目录下
      */
-    public static final String OUT_PATH = Config.class.getResource(".").getPath().split("target")[0]+"src/main/java/temporary";
+    public static final String OUT_PATH = TableConfig.class.getResource(".").getPath().split("target")[0]+"src/main/java/temporary";
     /**
      * 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_，默认为空
      */
     public static final String TABLE_REMOVE_PREFIXES = null;
-
-
-
+    /**
+     * 生成特殊实体类 这无需更改
+     */
+    public static final int GET_SPECIAL_VO = 1;
+    /**
+     * 生成MVC 这无需更改
+     */
+    public static final int GET_MVC = 2;
 }

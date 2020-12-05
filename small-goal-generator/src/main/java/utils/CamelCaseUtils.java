@@ -1,7 +1,7 @@
 package utils;
 
 public class CamelCaseUtils {
-	public static String toUnderlineName(String str) {
+	/*public static String toUnderlineName(String str) {
 		if (str == null || "".equals(str.trim())) {
 			return "";
 		} else {
@@ -26,7 +26,7 @@ public class CamelCaseUtils {
 			}
 			return sb.toString();
 		}
-	}
+	}*/
 
 	public static String toCamelCase(String str) {
 		if (str == null || "".equals(str.trim())) {
