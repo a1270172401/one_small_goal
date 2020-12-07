@@ -12,27 +12,27 @@ public class Special {
     /**
      * 目标字段名
      */
-    @ExcelProperty(value = "aimingField")
+    @ExcelProperty(value = "目标字段名")
     private String aimingField;
     /**
      * 目标字段类型
      */
-    @ExcelProperty(value = "type")
+    @ExcelProperty(value = "目标字段类型")
     private String type;
     /**
-     * 数据库字段名
+     * 数据库对应实体类字段名
      */
-    @ExcelProperty(value = "originalField")
+    @ExcelProperty(value = "数据库对应实体类字段名")
     private String originalField;
     /**
      * 字段备注
      */
-    @ExcelProperty(value = "fieldComment")
+    @ExcelProperty(value = "字段备注")
     private String fieldComment;
     /**
      * 类名称
      */
-    @ExcelProperty(value = "taxon")
+    @ExcelProperty(value = "类名称")
     private String taxon;
 
     @Override
