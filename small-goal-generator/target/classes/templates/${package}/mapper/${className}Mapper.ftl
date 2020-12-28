@@ -5,10 +5,10 @@ import ${packageFirst}.${package}.utils.Page;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
-/** 
- * Description: ${table.tableDesc}mapper
- * Created on ${date}
- * @author  ${author}
+/**
+* Description: ${table.tableDesc}mapper
+* Created on ${date}
+* @author  ${author}
 */
 @Mapper
 public interface ${className}Mapper{

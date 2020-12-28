@@ -85,30 +85,30 @@ public class ExcelUtils {
             System.out.println("处理数据 ==> " + list);
             Map root = new HashMap();
             String outRoot = CommonConfig.OUT_PATH;
-            root.put("specials",list);
-            root.put("taxon",list.get(0).getTaxon());
+            root.put("specials", list);
+            root.put("taxon", list.get(0).getTaxon());
             root.put("packageFirst", CommonConfig.PACKAGE_FIRST);
             root.put("package", CommonConfig.BASE_PACKAGE);
-            root.put("classNameLower",list.get(0).getTaxon());
-            root.put("date",CommonConfig.DATE);
-            root.put("author",CommonConfig.AUTHOR);
+            root.put("classNameLower", list.get(0).getTaxon());
+            root.put("date", CommonConfig.DATE);
+            root.put("author", CommonConfig.AUTHOR);
             Configuration cfg = new Configuration(Configuration.VERSION_2_3_21);
             String templateDir = this.getClass().getClassLoader().getResource("votemp").getPath();
             File tdf = new File(templateDir);
             List<File> files = FileHelper.findAllFile(tdf);
-            for(File f: files){
+            for (File f : files) {
                 String parentDir = "";
-                if( f.getParentFile().compareTo(tdf) != 0 ){
+                if (f.getParentFile().compareTo(tdf) != 0) {
                     parentDir = f.getParent().split("templates")[1];
                 }
                 cfg.setClassForTemplateLoading(this.getClass(), "/votemp" + parentDir);
 
-                Template template = cfg.getTemplate(f.getName(),"UTF-8");
+                Template template = cfg.getTemplate(f.getName(), "UTF-8");
                 String parentFileDir = FileHelper.genFileDir(parentDir, root);
                 parentFileDir = parentFileDir.replace(".", "/");
-                String file = FileHelper.genFileDir(f.getName(),root).replace(".ftl", ".java");
+                String file = FileHelper.genFileDir(f.getName(), root).replace(".ftl", ".java");
                 File newFile = FileHelper.makeFile(outRoot + parentFileDir + "/" + file);
-                Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream( newFile ), "UTF-8"));
+                Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile), "UTF-8"));
                 template.process(root, out);
             }
         }

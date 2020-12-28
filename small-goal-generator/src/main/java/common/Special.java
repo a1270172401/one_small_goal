@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 特殊实体类映射文件
+ *
  * @author 念着倒才子傻
  */
 @Data

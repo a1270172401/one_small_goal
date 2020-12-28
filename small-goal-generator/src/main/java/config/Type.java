@@ -10,11 +10,11 @@ public enum Type {
     /**
      * 生成特殊VO
      */
-    MEKE_SPECIAL_VO("生成特别的VO对象",1),
+    MEKE_SPECIAL_VO("生成特别的VO对象", 1),
     /**
      * 生成数据库表的MVC层
      */
-    MEKE_DATABASE_ENTITY("生成数据库实体类和MVC层",2);
+    MEKE_DATABASE_ENTITY("生成数据库实体类和MVC层", 2);
 
     private String detail;
     private int type;

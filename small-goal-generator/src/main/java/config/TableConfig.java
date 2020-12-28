@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * 生成MVC配置文件
+ *
  * @author 念着倒才子傻
  */
 public class TableConfig {

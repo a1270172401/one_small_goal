@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 
-/** 
+/**
  * Description: ${classNameLower}VO类
  * Created on ${date}
  * @author  ${author}
@@ -19,11 +19,13 @@ public class ${taxon}VO implements Serializable {
     private static final long serialVersionUID = 1L;
 
 <#list specials as special>
+
     /**
      * ${special.fieldComment}
      */
     @ApiModelProperty(value = "${special.fieldComment}",name = "${special.aimingField}")
     @JsonProperty("${special.aimingField}")
-	private ${special.type} ${special.originalField};
+    private ${special.type} ${special.originalField};
+
 </#list>
 }

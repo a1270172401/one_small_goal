@@ -28,29 +28,29 @@ public class CamelCaseUtils {
 		}
 	}*/
 
-	public static String toCamelCase(String str) {
-		if (str == null || "".equals(str.trim())) {
-			return null;
-		} else {
-			str = str.toLowerCase();
-			StringBuilder sb = new StringBuilder(str.length());
-			boolean upperCase = false;
-			for (int i = 0; i < str.length(); i++) {
-				char c = str.charAt(i);
-				if (c == '_') {
-					if( i == 0 ){
-						sb.append(c);
-					}else{
-						upperCase = true;
-					}
-				} else if (upperCase) {
-					sb.append(Character.toUpperCase(c));
-					upperCase = false;
-				} else {
-					sb.append(c);
-				}
-			}
-			return sb.toString();
-		}
-	}
+    public static String toCamelCase(String str) {
+        if (str == null || "".equals(str.trim())) {
+            return null;
+        } else {
+            str = str.toLowerCase();
+            StringBuilder sb = new StringBuilder(str.length());
+            boolean upperCase = false;
+            for (int i = 0; i < str.length(); i++) {
+                char c = str.charAt(i);
+                if (c == '_') {
+                    if (i == 0) {
+                        sb.append(c);
+                    } else {
+                        upperCase = true;
+                    }
+                } else if (upperCase) {
+                    sb.append(Character.toUpperCase(c));
+                    upperCase = false;
+                } else {
+                    sb.append(c);
+                }
+            }
+            return sb.toString();
+        }
+    }
 }

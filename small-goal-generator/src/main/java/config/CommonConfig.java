@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * 公共配置文件
+ *
  * @author 念着倒才子傻
  */
 public class CommonConfig {
@@ -41,7 +42,7 @@ public class CommonConfig {
     /**
      * 生成文件的位置，默认在当前项目的目录下
      */
-    public static final String OUT_PATH = TableConfig.class.getResource(".").getPath().split("target")[0]+"src/main/java/temporary";
+    public static final String OUT_PATH = TableConfig.class.getResource(".").getPath().split("target")[0] + "src/main/java/temporary";
     /**
      * 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_，默认为空
      */

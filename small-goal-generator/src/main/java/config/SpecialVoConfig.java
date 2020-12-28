@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 生成特殊实体类配置文件
+ *
  * @author 念着倒才子傻
  */
 @Configuration

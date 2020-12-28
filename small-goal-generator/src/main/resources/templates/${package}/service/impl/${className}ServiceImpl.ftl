@@ -14,11 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Service("${classNameLower}ServiceImpl")
 public class ${className}ServiceImpl implements ${className}Service {
-    private static final Logger LOGGER = LoggerFactory.getLogger(${className}ServiceImpl.class);
+private static final Logger LOGGER = LoggerFactory.getLogger(${className}ServiceImpl.class);
 
-
-	@Autowired
-	private ${className}Mapper ${classNameLower}Mapper;
+    @Autowired
+    private ${className}Mapper ${classNameLower}Mapper;
 
 
 }

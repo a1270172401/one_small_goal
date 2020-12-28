@@ -7,5 +7,5 @@ package ${packageFirst}.${package}.service;
  */
 public interface ${className}Service {
 
-	
+
 }
