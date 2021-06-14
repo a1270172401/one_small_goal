@@ -18,17 +18,17 @@ public class TableConfig {
      */
     public static final String MODEL_ID = "id";
     /**
-     * 表名
+     * 表名 多个逗号分割
      */
-    public static final String TABLE_NAME = "";
+    public static final String TABLE_NAME = "t_user_rank";
     /**
-     * 表备注
+     * 表备注  多个逗号分割
      */
-    public static final String TABLE_REMARK = "";
+    public static final String TABLE_REMARK = "用户排名表";
     /**
      * 数据库连接
      */
-    public static final String JDBC_URL = "jdbc:mysql://49.234.192.103:3306/test?useUnicode=true&amp;characterEncoding=UTF8";
+    public static final String JDBC_URL = "jdbc:mysql://8.129.43.94:3307/t_xy_cow?useUnicode=true&amp;characterEncoding=UTF8";
     /**
      * 数据库账户
      */

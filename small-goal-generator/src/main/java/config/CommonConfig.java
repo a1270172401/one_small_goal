@@ -14,7 +14,7 @@ public class CommonConfig {
     /**
      * 操作类型
      */
-    public static final Type TYPE = Type.MEKE_SPECIAL_VO;
+    public static final Type TYPE = Type.MEKE_DATABASE_ENTITY;
     /**
      * 作者
      */
@@ -34,7 +34,7 @@ public class CommonConfig {
     /**
      * 包名
      */
-    public static final String BASE_PACKAGE = "com.temporary";
+    public static final String BASE_PACKAGE = "com.xy";
     /**
      * 导报最外层包名,需要和文件生成位置最后一级目录对应
      */

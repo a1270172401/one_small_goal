@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created on ${date}
  * @author ${author}
  */
-@Service("${classNameLower}ServiceImpl")
+@Sl4j
+@Service("${classNameLower}Service")
 public class ${className}ServiceImpl implements ${className}Service {
-private static final Logger LOGGER = LoggerFactory.getLogger(${className}ServiceImpl.class);
 
     @Autowired
     private ${className}Mapper ${classNameLower}Mapper;

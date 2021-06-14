@@ -4,11 +4,24 @@
 
 <mapper namespace="${packageFirst}.${package}.mapper.${className}Mapper">
     <!-- 返回值映射map -->
-    <resultMap id="${classNameLower}VOMapperMap" type="${packageFirst}.${package}.vo.${className}VO">
+    <resultMap id="${classNameLower}Map" type="${packageFirst}.${package}.entity.${className}">
         <#list table.columns as column>
-        <result property="${column.name}" column="${column.dbName}"/>
+         <result property="${column.name}" column="${column.dbName}"/>
+        </#list>
+    </resultMap>
+
+    <sql id="SelectColumn">
+    <#list table.columns as column>
+        ${column.dbName},
     </#list>
-</resultMap>
+    </sql>
+
+    <select id="selectByNo" resultMap="${classNameLower}Map">
+    select
+    <include refid="SelectColumn"/>
+    from
+    ${table.dbName}
+    </select>
 
 
-        </mapper>
+</mapper>

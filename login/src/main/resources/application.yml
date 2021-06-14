@@ -3,6 +3,13 @@ server:
 spring:
   application:
     name: login
+  datasource:
+    url: jdbc:mysql://8.129.43.94:3307/demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
     #继承公共包的yml文件内容 分支切换用逗号分隔在后面添加对应分支即可
     include: bootstrap
+mybatis:
+  mapper-locations: com.**.*.xml

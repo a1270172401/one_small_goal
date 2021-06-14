@@ -121,15 +121,15 @@ public class Generator {
         Table t = this.parseTable(tableName);
         t.setTableDesc(tableDescAndCat.split("_")[0]);
         root.put("table", t);
-        root.put("className", t.getNameUpper());
-        root.put("classNameLower", t.getName());
+        root.put("className", t.getNameUpper().substring(1));
+        root.put("classNameLower", t.getName().substring(1));
         root.put("primaryKey", id);
         root.put("modelId", modelId);
         root.put("modelIdFirstUpper", buffer);
         root.put("package", CommonConfig.BASE_PACKAGE);
         root.put("date", CommonConfig.DATE);
         root.put("year", CommonConfig.YEAR);
-//		root.put("author", CommonConfig.AUTHOR);
+		root.put("author", CommonConfig.AUTHOR);
         root.put("email", CommonConfig.EMAIL);
         root.put("packageFirst", CommonConfig.PACKAGE_FIRST);
         String templateDir = this.getClass().getClassLoader().getResource("templates").getPath();
@@ -180,7 +180,17 @@ public class Generator {
     private static void dateBase() throws Exception {
         Generator g = new Generator();
         Map<String, String> map = new HashMap<String, String>();
-        map.put(TableConfig.TABLE_NAME, TableConfig.TABLE_REMARK);
+        String[] split = TableConfig.TABLE_NAME.split(",");
+        System.out.println(split.length);
+        String[] split1 = TableConfig.TABLE_REMARK.split(",");
+        if (split.length!=split1.length){
+            System.out.println("表名和表不一致");
+            return;
+        }
+        for (int i = 0; i < split.length; i++) {
+            System.out.println("key:"+split[i]+" value:"+split1[i]);
+            map.put(split[i],split1[i]);
+        }
         for (Map.Entry<String, String> e : map.entrySet()) {
             //id 是数据库主键字段
             g.gen(e.getKey(), e.getValue(), TableConfig.ID, TableConfig.MODEL_ID);

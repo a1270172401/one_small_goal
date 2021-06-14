@@ -13,10 +13,11 @@ import ${packageFirst}.${package}.service.${className}Service;
  * Created on ${date}
  * @author  ${author}
  */
+@Slf4j
 @RestController
-@RequestMapping("/${classNameLower}Controller")
+@RequestMapping("/${classNameLower}")
+@Api(tags = "管理")
 public class ${className}Controller {
-private static final Logger LOGGER = LoggerFactory.getLogger(${className}Controller.class);
 
     @Autowired
     private ${className}Service ${classNameLower}Service;

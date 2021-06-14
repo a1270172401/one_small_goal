@@ -9,16 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ${packageFirst}.${package}.service.${className}Service;
 
 /**
-* Description: ${classNameLower}控制层
-* Created on ${date}
-* @author  ${author}
-*/
+ * Description: ${classNameLower}控制层
+ * Created on ${date}
+ * @author  ${author}
+ */
+@Slf4j
 @RestController
-@RequestMapping("/${classNameLower}Controller")
+@RequestMapping("/${classNameLower}")
+@Api(tags = "管理")
 public class ${className}Controller {
-private static final Logger LOGGER = LoggerFactory.getLogger(${className}Controller.class);
 
-@Autowired
-private ${className}Service ${classNameLower}Service;
+    @Autowired
+    private ${className}Service ${classNameLower}Service;
 
 }
